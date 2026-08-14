@@ -60,6 +60,16 @@ function clearCookie(res, name) {
   res.setHeader('Set-Cookie', `${name}=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0`);
 }
 
+// Node's setHeader rejects any char outside Latin1 (e.g. Chinese names) with
+// ERR_INVALID_CHAR — and that throw happens synchronously inside http.request,
+// leaving the client request unanswered (-> NPM 504). Make header values safe.
+function headerSafe(v) {
+  if (v == null) return '';
+  const s = String(v);
+  if (/^[\x00-\xFF]*$/.test(s)) return s;   // already Latin1-safe
+  return 'enc:' + encodeURIComponent(s);    // ASCII-safe, upstream can decode
+}
+
 // --- Feishu API ------------------------------------------------------------
 function feishuRequest(method, apiPath, body, headers) {
   return new Promise((resolve, reject) => {
@@ -165,8 +175,8 @@ function proxyToDsh(req, res, session) {
   delete headers['transfer-encoding'];
   delete headers['upgrade'];
   headers['host'] = up.host;
-  headers['x-feishu-open-id'] = session.open_id || '';
-  headers['x-feishu-name'] = session.name || '';
+  headers['x-feishu-open-id'] = headerSafe(session.open_id);
+  headers['x-feishu-name'] = headerSafe(session.name);
 
   const options = {
     protocol: up.protocol,
