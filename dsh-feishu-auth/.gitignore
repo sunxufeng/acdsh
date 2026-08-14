@@ -1,0 +1,4 @@
+# Real config with Feishu app secret — NEVER commit.
+config.json
+node_modules/
+*.log

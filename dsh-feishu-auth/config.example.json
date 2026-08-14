@@ -1,0 +1,11 @@
+{
+  "appId": "cli_xxxxxxxxxxxxxxxx",
+  "appSecret": "REPLACE_WITH_YOUR_FEISHU_APP_SECRET",
+  "feishuBase": "https://open.feishu.cn",
+  "redirectUri": "https://your-domain.example.com/feishu/callback",
+  "dshUpstream": "http://127.0.0.1:3080",
+  "port": 3090,
+  "bindAddresses": ["172.18.0.1", "127.0.0.1"],
+  "sessionTtlSeconds": 86400,
+  "secureCookie": true
+}

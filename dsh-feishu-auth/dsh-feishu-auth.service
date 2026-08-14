@@ -1,0 +1,14 @@
+[Unit]
+Description=DSH Feishu OAuth login proxy
+After=network.target dsh-web.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/node /opt/dsh-feishu-auth/server.js
+Environment=DSH_FEISHU_CONFIG=/opt/dsh-feishu-auth/config.json
+Restart=always
+RestartSec=3
+User=root
+
+[Install]
+WantedBy=multi-user.target
