@@ -184,6 +184,14 @@ function proxyToDsh(req, res, session) {
     pres.on('error', () => { try { res.destroy(); } catch (_) {} });
     pres.pipe(res);
   });
+  // Never hang on a slow/unresponsive DSH: fail fast instead of letting NPM 504.
+  p.setTimeout(CONFIG.upstreamTimeoutMs || 30000, () => {
+    if (!res.headersSent) {
+      try { res.writeHead(504, { 'Content-Type': 'text/plain; charset=utf-8' }); } catch (_) {}
+      try { res.end('Gateway timeout: DSH did not respond in time.'); } catch (_) {}
+    }
+    try { p.destroy(); } catch (_) {}
+  });
   p.on('error', (e) => {
     if (!res.headersSent) res.writeHead(502, { 'Content-Type': 'text/plain; charset=utf-8' });
     res.end('Bad gateway: ' + e.message);
@@ -302,6 +310,7 @@ function handleUpgrade(req, clientSocket, head) {
     headers: Object.assign(headers, { host: up.host }),
   };
   const p = http.request(options);
+  p.setTimeout(CONFIG.upstreamTimeoutMs || 30000, () => { try { p.destroy(); } catch (_) {} });
   p.on('upgrade', (pres, serverSocket, phead) => {
     clientSocket.write('HTTP/1.1 101 Switching Protocols\r\n');
     for (const [k, v] of Object.entries(pres.headers)) {
