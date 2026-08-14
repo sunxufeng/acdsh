@@ -174,7 +174,13 @@ function proxyToDsh(req, res, session) {
   delete headers['connection'];
   delete headers['transfer-encoding'];
   delete headers['upgrade'];
+  // DSH's /api RPC bridge (dsh-client-connection) only trusts loopback Host and,
+  // when an Origin is present, requires it to equal that Host. The browser sends
+  // Origin=<public host> which can never match 127.0.0.1, so it 403s. Keep Host at
+  // the loopback upstream and drop Origin (DSH allows no-Origin requests through).
   headers['host'] = up.host;
+  delete headers['origin'];
+  delete headers['sec-fetch-site'];
   headers['x-feishu-open-id'] = headerSafe(session.open_id);
   headers['x-feishu-name'] = headerSafe(session.name);
 
@@ -311,13 +317,16 @@ function handleUpgrade(req, clientSocket, head) {
   const headers = Object.assign({}, req.headers);
   delete headers['connection'];
   delete headers['upgrade'];
+  headers['host'] = up.host;
+  delete headers['origin'];
+  delete headers['sec-fetch-site'];
   const options = {
     protocol: up.protocol,
     hostname: up.hostname,
     port: up.port,
     method: 'GET',
     path: req.url,
-    headers: Object.assign(headers, { host: up.host }),
+    headers,
   };
   const p = http.request(options);
   p.setTimeout(CONFIG.upstreamTimeoutMs || 30000, () => { try { p.destroy(); } catch (_) {} });
