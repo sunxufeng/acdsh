@@ -1,0 +1,5 @@
+# Host mount point (no-op); the browser client bundle does the real work.
+- insert:
+    - id: dsh-wb-schema-form-shim
+      name: "dsh-wb-schema-form-shim"
+      config: {}
