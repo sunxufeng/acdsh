@@ -1,0 +1,19 @@
+{
+  "name": "dsh-wb-library",
+  "version": "0.1.0",
+  "description": "WorkBuddy 风格的「资料库」功能:管理资料库与文档(标题/正文/标签),支持全文检索,参考 WorkBuddy 资料库。",
+  "license": "MIT",
+  "type": "module",
+  "main": "lib/index.js",
+  "files": ["lib", "cordis.patch.yml", "README.md"],
+  "keywords": ["dsh", "dsh-plugin", "deepseek-harness", "library", "knowledge", "workbuddy"],
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1",
+    "@deepseek-ai/dsh-tools": "^0.1.0-rc.6",
+    "@deepseek-ai/schemastery": "^3.18.1"
+  },
+  "dsh": {
+    "category": "workbuddy/library",
+    "bundle": { "patch": "./cordis.patch.yml" }
+  }
+}
