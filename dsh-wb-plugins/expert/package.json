@@ -1,0 +1,19 @@
+{
+  "name": "dsh-wb-expert",
+  "version": "0.1.0",
+  "description": "WorkBuddy 风格的「专家」功能:管理领域专家角色库,可激活某个专家注入其系统提示词,参考 WorkBuddy 专家。",
+  "license": "MIT",
+  "type": "module",
+  "main": "lib/index.js",
+  "files": ["lib", "cordis.patch.yml", "README.md"],
+  "keywords": ["dsh", "dsh-plugin", "deepseek-harness", "expert", "workbuddy", "role"],
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1",
+    "@deepseek-ai/dsh-tools": "^0.1.0-rc.6",
+    "@deepseek-ai/schemastery": "^3.18.1"
+  },
+  "dsh": {
+    "category": "workbuddy/expert",
+    "bundle": { "patch": "./cordis.patch.yml" }
+  }
+}
