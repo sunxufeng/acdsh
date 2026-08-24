@@ -1,0 +1,5 @@
+# One installable bundle row mounts the host (no-op) and publishes the browser client.
+- insert:
+    - id: dsh-wb-ui
+      name: 'dsh-wb-ui'
+      config: {}
