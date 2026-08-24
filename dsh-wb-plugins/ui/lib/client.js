@@ -219,6 +219,6 @@ window.__ModuleLoader__.load({
       }, "dsh-wb-ui: launcher");
     }
 
-    module.exports = { name: "dsh-wb-ui", inject: ["slots"], apply: apply };
+    return { name: "dsh-wb-ui", inject: ["slots"], apply: apply };
   }
 });
