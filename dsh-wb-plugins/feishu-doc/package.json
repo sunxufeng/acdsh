@@ -1,0 +1,19 @@
+{
+  "name": "dsh-wb-feishu-doc",
+  "version": "0.1.1",
+  "description": "参考 WorkBuddy「连接腾讯文档」功能,为 DSH 实现连接飞书文档:列出/读取/创建/编辑云文档与知识库;支持 user_access_token + refresh_token 自动续期。",
+  "license": "MIT",
+  "type": "module",
+  "main": "lib/index.js",
+  "files": ["lib", "cordis.patch.yml", "README.md"],
+  "keywords": ["dsh", "dsh-plugin", "deepseek-harness", "feishu", "lark", "doc", "workbuddy"],
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1",
+    "@deepseek-ai/dsh-tools": "^0.1.0-rc.6",
+    "@deepseek-ai/schemastery": "^3.18.1"
+  },
+  "dsh": {
+    "category": "workbuddy/feishu-doc",
+    "bundle": { "patch": "./cordis.patch.yml" }
+  }
+}
