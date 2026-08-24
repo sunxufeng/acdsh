@@ -885,8 +885,14 @@
   }
 
   // _entry.js
-  globalThis.__ModuleLoader__.load({
+  var ML = globalThis.__ModuleLoader__;
+  ML.load({
     id: "@deepseek-ai/dsh-client-schema-form",
     factory: (require2) => lib_exports
+  });
+  ML.load({
+    id: "dsh-wb-schema-form-shim",
+    factory: (require2) => ({ name: "dsh-wb-schema-form-shim", inject: [], apply() {
+    } })
   });
 })();
