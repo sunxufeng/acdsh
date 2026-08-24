@@ -1,0 +1,19 @@
+{
+  "name": "dsh-wb-assistant",
+  "version": "0.1.0",
+  "description": "WorkBuddy 风格的助理功能:管理可激活的助理角色(系统提示词/工具范围),参考 WorkBuddy 助理。",
+  "license": "MIT",
+  "type": "module",
+  "main": "lib/index.js",
+  "files": ["lib", "cordis.patch.yml", "README.md"],
+  "keywords": ["dsh", "dsh-plugin", "deepseek-harness", "assistant", "workbuddy", "agent"],
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1",
+    "@deepseek-ai/dsh-tools": "^0.1.0-rc.6",
+    "@deepseek-ai/schemastery": "^3.18.1"
+  },
+  "dsh": {
+    "category": "workbuddy/assistant",
+    "bundle": { "patch": "./cordis.patch.yml" }
+  }
+}
