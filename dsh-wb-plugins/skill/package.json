@@ -1,0 +1,19 @@
+{
+  "name": "dsh-wb-skill",
+  "version": "0.1.0",
+  "description": "WorkBuddy 风格的「技能」功能:管理可复用的技能包(描述/触发词/执行步骤),参考 WorkBuddy 技能。",
+  "license": "MIT",
+  "type": "module",
+  "main": "lib/index.js",
+  "files": ["lib", "cordis.patch.yml", "README.md"],
+  "keywords": ["dsh", "dsh-plugin", "deepseek-harness", "skill", "workbuddy"],
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1",
+    "@deepseek-ai/dsh-tools": "^0.1.0-rc.6",
+    "@deepseek-ai/schemastery": "^3.18.1"
+  },
+  "dsh": {
+    "category": "workbuddy/skill",
+    "bundle": { "patch": "./cordis.patch.yml" }
+  }
+}
