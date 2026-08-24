@@ -1,0 +1,19 @@
+{
+  "name": "dsh-wb-project",
+  "version": "0.1.0",
+  "description": "WorkBuddy 风格的「项目/计划看板」功能:管理项目与任务(待办/进行/暂停/完成),参考 WorkBuddy 项目看板。",
+  "license": "MIT",
+  "type": "module",
+  "main": "lib/index.js",
+  "files": ["lib", "cordis.patch.yml", "README.md"],
+  "keywords": ["dsh", "dsh-plugin", "deepseek-harness", "project", "task", "kanban", "workbuddy"],
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1",
+    "@deepseek-ai/dsh-tools": "^0.1.0-rc.6",
+    "@deepseek-ai/schemastery": "^3.18.1"
+  },
+  "dsh": {
+    "category": "workbuddy/project",
+    "bundle": { "patch": "./cordis.patch.yml" }
+  }
+}
