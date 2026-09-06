@@ -150,14 +150,14 @@ window.__ModuleLoader__.load({
       }, [isOpen]);
 
       function run(prompt) {
-        var kb = props.keyboard;
-        if (!kb || !kb.actions) {
+        var actions = props.inputActions;
+        if (!actions || typeof actions.setDraft !== "function" || typeof actions.submit !== "function") {
           window.alert("请先在左侧选择一个会话，再使用 WorkBuddy 功能。");
           return;
         }
         try {
-          kb.actions.setDraft(prompt);
-          kb.actions.submit();
+          actions.setDraft(prompt);
+          actions.submit();
         } catch (e) {
           window.alert("执行失败：" + (e && e.message ? e.message : String(e)));
         }
@@ -208,17 +208,10 @@ window.__ModuleLoader__.load({
     }
 
     // ---- 注册 ----
-    function apply(ctx) {
-      ctx.effect(function () {
-        return ctx.slots.inject("conversation.input.left", function () {
-          return ctx.slots.register(
-            { name: "conversation.input.left", id: "wb-launcher", order: 60 },
-            function (props) { return h(Launcher, props); }
-          );
-        });
-      }, "dsh-wb-ui: launcher");
-    }
-
+    // 2026-09-06 用户要求：把对话输入框里的 "🧰 WorkBuddy 工作台" 入口去掉。
+    // 这里不再注入 conversation.input.left 槽位；FEATURES 数据和 Launcher 组件
+    // 保留，将来如需挂到其他槽位（例如 sidebar.footer.action）只需补一行 slots.inject。
+    function apply(ctx) { /* 入口已禁用 */ }
     return { name: "dsh-wb-ui", inject: ["slots"], apply: apply };
   }
 });
