@@ -1,6 +1,6 @@
 {
   "name": "dsh-wb-ui",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "WorkBuddy 工作台 UI 入口：在对话输入框旁提供一个启动器，集中展示助理/项目/专家/技能/连接器/自动化/资料库/飞书文档 八大功能，点击即可把指令填入输入框并执行。",
   "type": "module",
   "main": "./lib/index.js",
